@@ -16,15 +16,17 @@ use App\Http\Controllers\RegistrationsController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+ 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-}); 
-
-Route::post('/register', [CustomersController::class, 'register']);
+Route::post('/register', [CustomersController::class, 'register']); 
 Route::post('/login', [CustomersController::class, 'login']);
-Route::get('packages', [PackagesController::class, 'index']);
-Route::post('register-package/{id}', [RegistrationsController::class, 'register']);
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('packages', [PackagesController::class, 'index']);  
+    Route::post('register-package/{id}', [RegistrationsController::class, 'register']);
+});
+
  
 
 
