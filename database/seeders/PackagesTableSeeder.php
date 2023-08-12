@@ -17,6 +17,6 @@ class PackagesTableSeeder extends Seeder
         DB::table('packages')->truncate();
 
         // Insert 15 fake packages
-        Packages::factory(15)->create();
+        Packages::factory()->times(15)->create();
     }
 }
