@@ -16,9 +16,7 @@ class RegistrationsController extends Controller
         $customer = Customers::find($request->customer_id);
         $registeredCount = Registrations::where('customer_id', $request->customer_id)->count(); 
         $limit = Packages::where('id', $id)->pluck('limit')->first();
- 
-        
-
+  
         if (!$customer) {
             return response()->json(['error' => 'User not found'], 404);
         }
@@ -34,12 +32,7 @@ class RegistrationsController extends Controller
 
         if ($registeredCount >= $limit) {
             return response()->json(['error' => 'Package is already full'], 400);
-        }
-
-        // Check if the user is already registered for the package
-        // if ($customer->packages->contains($package->id)) {
-        //     return response()->json(['error' => 'User is already registered for this package'], 400);
-        // }
+        } 
 
         // Create a new registration
         Registrations::create([
