@@ -1,29 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Packages;
-use Illuminate\Http\Request;
-use App\Models\Registrations;
+ 
+use Illuminate\Http\Request; 
+use App\Services\PackageService;
 
 class PackagesController extends Controller
 {
-    public function index(Request $request)
+    protected $packageService;
+
+    public function __construct(PackageService $packageService)
     {
-        $packages = Packages::all();
+        $this->packageService = $packageService;
+    }
 
-        $packagesWithAvailability = $packages->map(function ($package) {
-        $registeredCount = Registrations::where('package_id', $package->id)->count();
-        $availability = $registeredCount < $package->limit ? 'available' : 'unavailable';
-        
-        return [
-            'package' => $package,
-            'availability' => $availability,
-            'registered_count' => $registeredCount,
-            'limit' => $package->limit,
-        ];
-    });
+    public function index()
+    {
+        $packagesWithAvailability = $this->packageService->getPackagesWithAvailability();
 
-    return response()->json(['packages' => $packagesWithAvailability], 200);
+        return response()->json(['packages' => $packagesWithAvailability], 200);
     }
 }
