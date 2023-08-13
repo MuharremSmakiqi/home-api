@@ -9,7 +9,7 @@ This README provides instructions for setting up and using the Laravel applicati
 - [Running the Application](#running-the-application)
 - [Registration and Login](#registration-and-login)
 - [API Endpoints](#api-endpoints)
-- Commands
+- [Commands](#testing-api-endpoints)
 - [Testing API Endpoints](#testing-api-endpoints)
 
 ## Installation
