@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();  
             $table->uuid('uuid')->unique();
-            $table->string('customer_id')->references('id')->on('customers');
+            $table->integer('customer_id')->references('id')->on('customers');
             $table->integer('package_id')->references('id')->on('packages');
             $table->timestamp('registered_at');
         });
